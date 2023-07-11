@@ -1,35 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Products.css";
+import Swal from "sweetalert2";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    getAllProducts();
+  }, []);
+
+  const getAllProducts = () => {
     fetch("http://localhost:10000/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
       });
-  }, []);
+  };
 
-
-  const getAllProducts = ()=>{
-    
-  }
-
-  const deleteProduct = (id) => {
-    fetch(`http://localhost:10000/products/${id}`,{
-      method: "DELETE"
-    }).then(res => res.json()).then(data => {
-      console.log(data);
-    })
+  const deleteProduct = (product) => {
+    Swal.fire({
+      showCancelButton: true,
+      title: `Are You Sure You Want To Delete ${product.title}`,
+    }).then((data) => {
+      if (data.isConfirmed) {
+        fetch(`http://localhost:10000/products/${product.id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            getAllProducts();
+          });
+      }
+    });
   };
 
   return (
     <>
       <h1>Products</h1>
-      <Link to="product/add" className="btn btn-success mt-3">
+      <Link to="products/add" className="btn btn-success mt-3">
         Add Produts
       </Link>
       <table className="products-table table table-striped">
@@ -54,7 +63,7 @@ export default function Products() {
                   <div className="d-flex">
                     <button
                       onClick={(_) => {
-                        deleteProduct(product.id);
+                        deleteProduct(product);
                       }}
                       className="btn btn-danger btn-sm me-2"
                     >

@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddProduct() {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
+  let navigate = useNavigate();
 
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log("title:", title);
-    console.log("price:", price);
+
+    axios
+      .post("http://localhost:10000/products", {
+        title,
+        price,
+      })
+      .then((data) => {
+        navigate("/products");
+      });
   };
 
   return (

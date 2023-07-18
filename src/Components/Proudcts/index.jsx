@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Products.css";
 import Swal from "sweetalert2";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
- 
+
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -48,6 +48,7 @@ export default function Products() {
             <th>Title</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Category</th>
             <th>Operations</th>
           </tr>
         </thead>
@@ -57,8 +58,19 @@ export default function Products() {
               <tr key={index}>
                 <td>{product.id}</td>
                 <td>{product.title}</td>
-                <td>{typeof product.description === "string" ? product.description.slice(0, 20) : ""}...</td>
+                <td>
+                  {typeof product.description === "string"
+                    ? product.description.slice(0, 20)
+                    : ""}
+                  ...
+                </td>
                 <td>{product.price}</td>
+                <td>
+                  {typeof product.category === "string"
+                    ? product.description
+                    : ""}
+                  ...
+                </td>
                 <td>
                   <div className="d-flex">
                     <button

@@ -1,6 +1,6 @@
 import "./App.css";
-import Navbar from "./Components/Navbar/Navbar";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import Navbar from "./Components/Navbar";
+import Sidebar from "./Components/Sidebar";
 import { Route, Routes } from "react-router-dom";
 import Porducts from "./Components/Proudcts";
 import Porduct from "./Components/Product";

@@ -1,14 +1,3 @@
 {
-  "products": [
-    {
-      "title": "",
-      "price": 0,
-      "id": 1
-    },
-    {
-      "title": "",
-      "price": 0,
-      "id": 2
-    }
-  ]
+  "products": []
 }

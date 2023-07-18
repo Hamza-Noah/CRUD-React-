@@ -8,7 +8,7 @@ export default function Sidebar() {
         <Link to="products">Get All Products</Link>
       </li>
       <li>
-        <Link to="">Get All Categories</Link>
+        {/* <Link to="">Get All Categories</Link> */}
       </li>
     </ul>
   );

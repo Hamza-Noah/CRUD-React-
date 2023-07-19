@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Porducts from "./Components/Proudcts";
 import Porduct from "./Components/Product";
 import AddProduct from "./Components/AddProduct";
+import EditProduct from "./Components/EditProduct";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
               <Route index element={<Porducts />} />
               <Route path="add" element={<AddProduct />} />
               <Route path=":id" element={<Porduct />} />
+              <Route path="edit" element={<EditProduct />} />
             </Route>
           </Routes>
         </div>

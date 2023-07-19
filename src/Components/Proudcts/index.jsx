@@ -67,7 +67,7 @@ export default function Products() {
                 <td>{product.price}</td>
                 <td>
                   {typeof product.category === "string"
-                    ? product.description
+                    ? product.category
                     : ""}
                   ...
                 </td>

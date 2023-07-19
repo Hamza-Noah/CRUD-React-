@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
@@ -12,6 +12,7 @@ export default function AddProduct() {
       productName: "",
       productPrice: "",
       category: "",
+      prdouctDescription: "",
     },
     validationSchema: yup.object({
       productName: yup
@@ -24,16 +25,23 @@ export default function AddProduct() {
         .required("Product Price is required"),
       category: yup
         .string()
-        .max(100, "Prodcut description cannot exceed 100 characters"),
+        .max(25, "Prodcut category cannot exceed 25 characters")
+        .required("Product Description is required"),
+      prdouctDescription: yup
+        .string()
+        .max(100, "Product Description Cannot exceed 100 characters")
+        .required("Product Description is required"),
     }),
 
     onSubmit: (values) => {
-
-console.log(formik);
       navigate("/products");
+      axios.post("http://localhost:10000/products", {
+        title: formik.values.productName,
+        price: formik.values.productPrice,
+        category: formik.values.category,
+      });
     },
   });
-  console.log(formik.errors);
 
   return (
     <>
@@ -100,10 +108,31 @@ console.log(formik);
             />
             {formik.touched.category && formik.errors.category && (
               <div className="alert alert-danger mt-3" role="alert">
-                {formik.errors.productPrice}
+                {formik.errors.category}
               </div>
             )}
           </div>
+          <div className="mb-3">
+            <label htmlFor="prdouctDescription" className="form-label">
+              Prdouct Description
+            </label>
+            <textarea
+              name=""
+              rows="3"
+              aria-describedby="productDescription"
+              className="form-control"
+              id="prdouctDescription"
+              value={formik.values.prdouctDescription}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+            ></textarea>
+          </div>
+          {formik.touched.prdouctDescription &&
+            formik.errors.prdouctDescription && (
+              <div className="alert alert-danger my-3" role="alert">
+                {formik.errors.prdouctDescription}
+              </div>
+            )}
           <button type="submit" className="btn btn-primary">
             Add Product
           </button>

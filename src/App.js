@@ -14,7 +14,7 @@ function App() {
         <div className="col-12 p-0">
           <Navbar />
         </div>
-        <div className="col-2 sidebar">
+        <div className="sidebar col-2 p-0 pt-5">
           <Sidebar />
         </div>
         <div className="col-10">

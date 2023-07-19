@@ -24,7 +24,7 @@ function App() {
               <Route index element={<Porducts />} />
               <Route path="add" element={<AddProduct />} />
               <Route path=":id" element={<Porduct />} />
-              <Route path="edit" element={<EditProduct />} />
+              <Route path="edit/:id" element={<EditProduct />} />
             </Route>
           </Routes>
         </div>

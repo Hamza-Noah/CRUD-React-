@@ -56,7 +56,7 @@ export default function Products() {
           {products.map((product, index) => {
             return (
               <tr key={index}>
-                <td>{product.id}</td>
+                <td>{product.productName}</td>
                 <td>{product.title}</td>
                 <td>
                   {typeof product.description === "string"
@@ -66,9 +66,7 @@ export default function Products() {
                 </td>
                 <td>{product.price}</td>
                 <td>
-                  {typeof product.category === "string"
-                    ? product.category
-                    : ""}
+                  {typeof product.category === "string" ? product.category : ""}
                   ...
                 </td>
                 <td>
@@ -87,7 +85,12 @@ export default function Products() {
                     >
                       View
                     </Link>
-                    <button className="btn btn-primary btn-sm">Edit</button>
+                    <Link
+                      to={`/products/edit/${product.id}`}
+                      className="btn btn-primary btn-sm"
+                    >
+                      Edit
+                    </Link>
                   </div>
                 </td>
               </tr>

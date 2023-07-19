@@ -1,22 +1,16 @@
 {
   "products": [
     {
-      "title": "fasdfsadf",
-      "price": 23,
-      "category": "dasdag aadg age",
-      "id": 1
-    },
-    {
-      "title": "n jh bjhbhbuibui",
-      "price": 999,
-      "category": "hfdhfd",
-      "id": 2
-    },
-    {
-      "title": "fafweafweafwefwea",
+      "productName": "fafweafweafwefwea",
       "price": 999,
       "category": "fdbfdh dhd hd hdhre jjhhh",
       "id": 3
+    },
+    {
+      "productName": "dsadsa",
+      "price": 231,
+      "category": "ewqqwdqw ",
+      "id": 4
     }
   ]
 }

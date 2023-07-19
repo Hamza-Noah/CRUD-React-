@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
-export default function AddProduct() {
+export default function AddProduct(props) {
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -43,10 +43,29 @@ export default function AddProduct() {
     },
   });
 
+  // Edit Case
+
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    if (props.editState) {
+      fetch(`http://localhost:10000/products/${props.id}`)
+        .then((res) => res.json())
+        .then((json) => {
+          setProduct(json);
+        })
+        .then((_) => {
+          formik.setFieldValue("productName", product.productName);
+        });
+    }
+  }, []);
+
   return (
     <>
       <div className="pt-5">
-        <h1 className="text-center mb-5">Adding Product Form</h1>
+        <h1 className="text-center mb-5">
+          {props.edit ? "Editing" : "Adding"} Product Form
+        </h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-3">
             <label htmlFor="productName" className="form-label">
@@ -60,7 +79,7 @@ export default function AddProduct() {
               placeholder="Product Title"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.title}
+              value={formik.values.productName}
             />
             {formik.touched.productName && formik.errors.productName && (
               <div className="alert alert-danger mt-3" role="alert">
@@ -126,13 +145,14 @@ export default function AddProduct() {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             ></textarea>
-          </div>
-          {formik.touched.prdouctDescription &&
+             {formik.touched.prdouctDescription &&
             formik.errors.prdouctDescription && (
               <div className="alert alert-danger my-3" role="alert">
                 {formik.errors.prdouctDescription}
               </div>
             )}
+          </div>
+         
           <button type="submit" className="btn btn-primary">
             Add Product
           </button>

@@ -17,7 +17,21 @@ export default function Product() {
 
   return (
     <>
-     {product.title}
+      <div className="row">
+        <div className="col"></div>
+        <div className="col-12 col-md-6 col-lg-4">
+          <div className="card">
+            <div className="card-body">
+              <h1 className="card-title text-center">{product.title}</h1>
+              <p className="card-text text-center">
+                Product ID: <b>{product.id}</b>{" "}
+              </p>
+              <p className="card-text text-center">{product.description}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col"></div>
+      </div>
     </>
   );
 }

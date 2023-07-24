@@ -39,6 +39,7 @@ export default function AddProduct(props) {
         title: formik.values.productName,
         price: formik.values.productPrice,
         category: formik.values.category,
+        description: formik.values.prdouctDescription
       });
     },
   });

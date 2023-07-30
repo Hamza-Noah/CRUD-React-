@@ -39,7 +39,7 @@ export default function AddProduct(props) {
         title: formik.values.productName,
         price: formik.values.productPrice,
         category: formik.values.category,
-        description: formik.values.prdouctDescription
+        description: formik.values.prdouctDescription,
       });
     },
   });
@@ -51,12 +51,13 @@ export default function AddProduct(props) {
   useEffect(() => {
     if (props.editState) {
       fetch(`http://localhost:10000/products/${props.id}`)
-        .then((res) => res.json())
-        .then((json) => {
+      .then((res) => res.json())
+      .then((json) => {
+          formik.setFieldValue("productName", json.title);
+          formik.setFieldValue("productPrice", json.price);
+          formik.setFieldValue("category", json.category);
+          formik.setFieldValue("prdouctDescription", json.description);
           setProduct(json);
-        })
-        .then((_) => {
-          formik.setFieldValue("productName", product.productName);
         });
     }
   }, []);
@@ -65,7 +66,7 @@ export default function AddProduct(props) {
     <>
       <div className="pt-5">
         <h1 className="text-center mb-5">
-          {props.edit ? "Editing" : "Adding"} Product Form
+          {props.editState ? "Editing" : "Adding"} Product Form
         </h1>
         <form onSubmit={formik.handleSubmit}>
           <div className="mb-3">
@@ -146,17 +147,23 @@ export default function AddProduct(props) {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             ></textarea>
-             {formik.touched.prdouctDescription &&
-            formik.errors.prdouctDescription && (
-              <div className="alert alert-danger my-3" role="alert">
-                {formik.errors.prdouctDescription}
-              </div>
-            )}
+            {formik.touched.prdouctDescription &&
+              formik.errors.prdouctDescription && (
+                <div className="alert alert-danger my-3" role="alert">
+                  {formik.errors.prdouctDescription}
+                </div>
+              )}
           </div>
-         
+          {!props.editState && 
           <button type="submit" className="btn btn-primary">
             Add Product
           </button>
+          }
+          {props.editState && 
+          <button type="submit" className="btn btn-primary">
+            Edit Product
+          </button>
+          }
         </form>
       </div>
     </>

@@ -56,7 +56,7 @@ export default function Products() {
           {products.map((product, index) => {
             return (
               <tr key={index}>
-                <td>{product.productName}</td>
+                <td>{product.id}</td>
                 <td>{product.title}</td>
                 <td>
                   {typeof product.description === "string"

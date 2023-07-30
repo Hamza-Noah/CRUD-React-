@@ -6,6 +6,7 @@ export default function EditProduct() {
   const { id } = useParams();
   const [product, setProduct] = useState();
 
+
   useEffect(() => {
     fetch(`http://localhost:10000/products/${id}`)
       .then((res) => res.json())
